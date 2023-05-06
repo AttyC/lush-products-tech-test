@@ -1,55 +1,30 @@
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Link from "next/link";
 
-const querySlugOnly = gql`
-  {
-    products(channel: "uk", first: 10) {
-      edges {
-        node {
-          slug
-        }
-      }
-    }
-  }
-`;
-
-export async function getStaticPaths() {
-  const client = new ApolloClient({
-    uri: "https://unicorn-staging.eu.saleor.cloud/graphql/",
-    cache: new InMemoryCache(),
-  });
-
-  const { data } = await client.query({
-    query: querySlugOnly,
-  });
-
-  const paths = data.products.edges.map((product) => {
-    return {
-      params: { detail: product.node.slug },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
 const queryProductBySlug = gql`
   query ($slug: String!) {
     product(channel: "uk", slug: $slug) {
       id
       name
       slug
+      category {
+        name
+      }
+      media {
+        id
+        url
+        alt
+        sortOrder
+      }
     }
   }
 `;
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const variables = {
     slug: params.detail,
   };
-
+  // import this later
   const client = new ApolloClient({
     uri: "https://unicorn-staging.eu.saleor.cloud/graphql/",
     cache: new InMemoryCache(),
@@ -84,4 +59,5 @@ export default function Detail({ data }) {
       </Link>
     </div>
   );
+  return <>hello</>;
 }
