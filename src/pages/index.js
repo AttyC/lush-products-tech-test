@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { ProductPreview } from "@/components/ProductPreview";
+import placeholderImage from "../../assets/coming-soon-lush.png";
 
 export default function Product({ data }) {
   const allProducts = data.products.edges;
@@ -10,16 +11,27 @@ export default function Product({ data }) {
     const { node } = product;
     viewModel.counter++;
 
-    console.log("NODE", node);
-
     let productVm = {
       key: viewModel.counter,
       name: node.name,
       id: node.id,
       slug: node.slug,
       category: node.category.name,
+      thumbnail: !node.thumbnail
+        ? {
+            url: placeholderImage,
+            alt: "image coming soon",
+          }
+        : node.thumbnail,
       images: !node.media
-        ? []
+        ? [
+            {
+              id: -1,
+              url: placeholderImage,
+              alt: "image coming soon",
+              sortOrder: 0,
+            },
+          ]
         : node.media.map((images) => {
             return {
               id: images.id,
@@ -35,7 +47,9 @@ export default function Product({ data }) {
   return (
     <main className={`flex min-h-screen flex-col items-center`}>
       <h1 className={`py-2 text-2xl`}>Check out our latest products!</h1>
-      <ul>
+      <ul
+        className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16`}
+      >
         {viewModel.products.map((productVm) => (
           <ProductPreview vm={productVm} key={productVm.key} />
         ))}
@@ -55,11 +69,9 @@ export const query = gql`
           category {
             name
           }
-          media {
-            id
+          thumbnail {
             url
             alt
-            sortOrder
           }
         }
       }
