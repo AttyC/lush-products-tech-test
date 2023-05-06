@@ -22,7 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to view an
 
 ## With more time
 
-- Add tests - I started with Jest after I'd set up most of the basics but there is a conflict woth the Apollo setup and Jest.
+- Add tests - I started with Jest after I'd set up most of the basics but there is a conflict woth the Apollo setup and Jest. I tred installing cross-fetch but there were a few more errors which I didn't get through. With time I would consider either removing Apollo Client and using native fetch(), or debugging the conflicts described above.
 - Display a grid for each category order
 - More sorting options ie a select / buttons for filtering and sorting on different criteria - star ratings, category, flag where items are not available.
 - Sale listings for products at sale or dicsounted prices.
