@@ -12,15 +12,17 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to view and interact with the app.
 
 ## Decisions
 
 - NextJS: I chose to use Next.js, which I haven't used before, rather than Gatsby or using React without server-side rendering, whic I have used a lot.
 - Apollo Client for GraphQL queries: I haven't used Apollo for GraphQL before, as it's 'baked in' to Gatsby, which is where I've used GraphQL most. Another option was to use `fetch()`, which might have been a bit simpler, but I've used that a lot in other React apps and was up for learning something new.
+- Tailwind for the CSS - it came with the Next installaion. I usually ise styled-components abut for speed and also to try something new (again!) I chose to use Tailwind.
 
 ## With more time
 
-Add tests - I started with Jest
-Display a grid for each category order
-Add a where you can buy button
+- Add tests - I started with Jest after I'd set up most of the basics but there is a conflict woth the Apollo setup and Jest.
+- Display a grid for each category order
+- More sorting options ie a select / buttons for filtering and sorting on different criteria - star ratings, category, flag where items are not available.
+- Sale listings for products at sale or dicsounted prices.

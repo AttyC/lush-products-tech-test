@@ -60,11 +60,7 @@ export default function Home({ data }) {
         <ProductGrid data={viewModel} />
         <ul
           className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16 py-2`}
-        >
-          {viewModel.products.map((productVm) => (
-            <ProductPreview vm={productVm} key={productVm.key} />
-          ))}
-        </ul>
+        ></ul>
       </main>
     </Layout>
   );
@@ -87,6 +83,7 @@ export const query = gql`
             url
             alt
           }
+          isAvailableForPurchase
         }
       }
     }
