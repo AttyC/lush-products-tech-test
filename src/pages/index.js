@@ -1,10 +1,11 @@
 import { gql } from "@apollo/client";
-import Client from "@/utils/Client";
+import client from "@/utils/Client";
 import Layout from "@/components/Layout";
 import { ProductPreview } from "@/components/ProductPreview";
 import placeholderImage from "../../assets/coming-soon-lush.png";
+import { ProductGrid } from "@/components/ProductGrid";
 
-export default function Product({ data }) {
+export default function Home({ data }) {
   const allProducts = data.products.edges;
 
   // create a viewModel to gain control over the shape of the data and remove the logic from the UI
@@ -56,6 +57,8 @@ export default function Product({ data }) {
         <h1 className={`py-4 text-2xl`}>
           Pamper yourself with our skin-loving range.
         </h1>
+        {/* // organise by categories */}
+        <ProductGrid data={viewModel} />
         <ul
           className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16 py-2`}
         >
@@ -92,8 +95,8 @@ export const query = gql`
 `;
 
 export async function getServerSideProps() {
-  const { data } = await Client.query({
-    uri: Client.uri,
+  const { data } = await client.query({
+    uri: client.uri,
     query: query,
   });
 
