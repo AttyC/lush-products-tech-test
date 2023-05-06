@@ -9,7 +9,7 @@ export const ProductPreview = ({ vm }) => {
     >
       <Link
         href={"/products/" + vm.slug}
-        className='group rounded-lg border border-transparent transition-colors border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
+        className='flex flex-col justify-between rounded-lg border border-transparent transition-colors border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
       >
         <h2 className={`py-4 px-4`}>{vm.name}</h2>
 

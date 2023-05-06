@@ -57,7 +57,6 @@ export default function Home({ data }) {
         <h1 className={`py-4 text-2xl`}>
           Pamper yourself with our skin-loving range.
         </h1>
-        {/* // organise by categories */}
         <ProductGrid data={viewModel} />
         <ul
           className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16 py-2`}

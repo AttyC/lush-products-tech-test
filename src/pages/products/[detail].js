@@ -26,6 +26,11 @@ const queryProductBySlug = gql`
         url
         alt
       }
+      variants {
+        margin
+        sku
+        quantityAvailable
+      }
       weight {
         unit
         value
@@ -53,18 +58,21 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function Detail({ data }) {
-  const { name, media, category, description, rating, weight } = data.product;
+  const { name, media, category, description, rating, variants, weight } =
+    data.product;
 
+  console.log("ghsgaHJS", data.product);
   const stars = Math.round(rating);
-  const productWeight = !!weight
-    ? {
-        value: weight.value,
-        unit: weight.unit,
-      }
-    : {
-        value: " not listed",
-        unit: null,
-      };
+  const productWeight =
+    weight !== null
+      ? {
+          value: weight.value,
+          unit: weight.unit,
+        }
+      : {
+          value: " not listed",
+          unit: null,
+        };
 
   // create an Images viewModel to gain control over the shape of the data
   let imagesVM = { images: [] };
@@ -110,6 +118,8 @@ export default function Detail({ data }) {
     parseDescriptionText();
   }
 
+  console.log("hello!", productWeight);
+
   return (
     <Layout>
       <main className={`min-h-screen container mx-auto`}>
@@ -118,10 +128,9 @@ export default function Detail({ data }) {
           <Gallery vm={imagesVM} />
           <div className={`lg:flex`}>
             <ProductDescription data={{ category, stars, descriptionText }} />
-            <Specification weight={productWeight} />
+            <Specification data={{ productWeight, variants }} />
           </div>
         </section>
-
         <BackHomeButton />
       </main>
     </Layout>

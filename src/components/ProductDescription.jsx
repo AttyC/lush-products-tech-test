@@ -1,7 +1,9 @@
 import Image from "next/image";
 
 export const ProductDescription = ({ data }) => {
-  const { name, category, descriptionText, stars } = data;
+  const { name, category, descriptionText, stars, variants } = data;
+
+  console.log("variants", variants);
 
   return (
     <div
