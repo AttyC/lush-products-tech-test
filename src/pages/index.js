@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { ProductPreview } from "@/components/ProductPreview";
 
@@ -12,19 +10,31 @@ export default function Product({ data }) {
     const { node } = product;
     viewModel.counter++;
 
+    console.log("NODE", node);
+
     let productVm = {
       key: viewModel.counter,
       name: node.name,
       id: node.id,
       slug: node.slug,
       category: node.category.name,
+      images: !node.media
+        ? []
+        : node.media.map((images) => {
+            return {
+              id: images.id,
+              url: images.url,
+              alt: images.alt,
+              sortOrder: images.sortOrder,
+            };
+          }),
     };
     viewModel.products.push(productVm);
   });
 
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-between`}>
-      <h1>Check out our latest products!</h1>
+    <main className={`flex min-h-screen flex-col items-center`}>
+      <h1 className={`py-2 text-2xl`}>Check out our latest products!</h1>
       <ul>
         {viewModel.products.map((productVm) => (
           <ProductPreview vm={productVm} key={productVm.key} />
@@ -45,6 +55,12 @@ export const query = gql`
           category {
             name
           }
+          media {
+            id
+            url
+            alt
+            sortOrder
+          }
         }
       }
     }
@@ -52,6 +68,7 @@ export const query = gql`
 `;
 
 export async function getServerSideProps() {
+  // import this later
   const client = new ApolloClient({
     uri: "https://unicorn-staging.eu.saleor.cloud/graphql/",
     cache: new InMemoryCache(),
