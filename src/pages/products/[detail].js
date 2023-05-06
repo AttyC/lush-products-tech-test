@@ -1,7 +1,6 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-
-import Image from "next/image";
-import { ProductDetail } from "@/components/ProductDetail";
+import { gql } from "@apollo/client";
+import Client from "@/utils/Client";
+import Layout from "@/components/Layout";
 import { Gallery } from "@/components/Gallery";
 import { ProductDescription } from "@/components/ProductDescription";
 import { Specification } from "@/components/Specification";
@@ -39,14 +38,9 @@ export async function getServerSideProps({ params }) {
   const variables = {
     slug: params.detail,
   };
-  // import this later
-  const client = new ApolloClient({
-    uri: "https://unicorn-staging.eu.saleor.cloud/graphql/",
-    cache: new InMemoryCache(),
-  });
 
-  const { data } = await client.query({
-    url: client,
+  const { data } = await Client.query({
+    url: Client,
     query: queryProductBySlug,
     variables: variables,
   });
@@ -61,12 +55,16 @@ export async function getServerSideProps({ params }) {
 export default function Detail({ data }) {
   const { name, media, category, description, rating, weight } = data.product;
 
+  const stars = Math.round(rating);
   const productWeight = !!weight
     ? {
         value: weight.value,
         unit: weight.unit,
       }
-    : " not listed";
+    : {
+        value: " not listed",
+        unit: null,
+      };
 
   // create an Images viewModel to gain control over the shape of the data
   let imagesVM = { images: [] };
@@ -81,7 +79,6 @@ export default function Detail({ data }) {
   });
 
   // create an Description viewModel to gain control over the shape of the data
-
   let descriptionText;
   const parseDescriptionText = () => {
     let descriptionVM = [];
@@ -114,15 +111,19 @@ export default function Detail({ data }) {
   }
 
   return (
-    <main className={`min-h-screen container mx-auto`}>
-      <section className={`flex flex-wrap rounded-lg border border-gray-300`}>
-        <Gallery vm={imagesVM} />
-        <ProductDescription
-          data={{ name, category, rating, descriptionText }}
-        />
-      </section>
-      <Specification weight={productWeight} />
-      <BackHomeButton />
-    </main>
+    <Layout>
+      <main className={`min-h-screen container mx-auto`}>
+        <section className={` rounded-lg border border-gray-300`}>
+          <h1 className={`text-4xl lg:px-8 lg:py-4 bg-gray-100`}>{name}</h1>
+          <Gallery vm={imagesVM} />
+          <div className={`lg:flex`}>
+            <ProductDescription data={{ category, stars, descriptionText }} />
+            <Specification weight={productWeight} />
+          </div>
+        </section>
+
+        <BackHomeButton />
+      </main>
+    </Layout>
   );
 }

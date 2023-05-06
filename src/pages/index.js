@@ -1,4 +1,6 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
+import Client from "@/utils/Client";
+import Layout from "@/components/Layout";
 import { ProductPreview } from "@/components/ProductPreview";
 import placeholderImage from "../../assets/coming-soon-lush.png";
 
@@ -6,6 +8,9 @@ export default function Product({ data }) {
   const allProducts = data.products.edges;
 
   // create a viewModel to gain control over the shape of the data and remove the logic from the UI
+  // I've used this method this to illustrate learning from the UI Architecture course -
+  // it may look over-engineered but when you get ito the pattern of it, it becomes second nature!
+
   let viewModel = { counter: 0, products: [] };
   allProducts.forEach((product) => {
     const { node } = product;
@@ -46,24 +51,27 @@ export default function Product({ data }) {
   });
 
   return (
-    <main className={`flex min-h-screen flex-col items-center`}>
-      <h1 className={`py-2 text-2xl`}>
-        Pamper yourself with our skin-loving range.
-      </h1>
-      <ul
-        className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16`}
-      >
-        {viewModel.products.map((productVm) => (
-          <ProductPreview vm={productVm} key={productVm.key} />
-        ))}
-      </ul>
-    </main>
+    <Layout>
+      <main className={`flex min-h-screen flex-col items-center`}>
+        <h1 className={`py-4 text-2xl`}>
+          Pamper yourself with our skin-loving range.
+        </h1>
+        <ul
+          className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16 py-2`}
+        >
+          {viewModel.products.map((productVm) => (
+            <ProductPreview vm={productVm} key={productVm.key} />
+          ))}
+        </ul>
+      </main>
+    </Layout>
   );
 }
 
 export const query = gql`
   {
-    products(channel: "uk", first: 10) {
+    products(channel: "uk", first: 40) {
+      totalCount
       edges {
         node {
           id
@@ -84,13 +92,8 @@ export const query = gql`
 `;
 
 export async function getServerSideProps() {
-  // import this later
-  const client = new ApolloClient({
-    uri: "https://unicorn-staging.eu.saleor.cloud/graphql/",
-    cache: new InMemoryCache(),
-  });
-  const { data } = await client.query({
-    uri: client.uri,
+  const { data } = await Client.query({
+    uri: Client.uri,
     query: query,
   });
 
