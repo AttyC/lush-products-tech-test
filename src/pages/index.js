@@ -40,13 +40,16 @@ export default function Product({ data }) {
               sortOrder: images.sortOrder,
             };
           }),
+      rating: Math.round(node.rating),
     };
     viewModel.products.push(productVm);
   });
 
   return (
     <main className={`flex min-h-screen flex-col items-center`}>
-      <h1 className={`py-2 text-2xl`}>Check out our latest products!</h1>
+      <h1 className={`py-2 text-2xl`}>
+        Pamper yourself with our skin-loving range.
+      </h1>
       <ul
         className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16`}
       >
@@ -69,6 +72,7 @@ export const query = gql`
           category {
             name
           }
+          rating
           thumbnail {
             url
             alt
