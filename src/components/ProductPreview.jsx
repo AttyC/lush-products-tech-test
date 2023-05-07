@@ -9,16 +9,16 @@ export const ProductPreview = ({ vm }) => {
     >
       <Link
         href={"/products/" + vm.slug}
-        className='flex flex-col justify-between rounded-lg border border-transparent transition-colors border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
+        className='flex flex-col justify-between rounded-lg border transition-colors border-gray-100 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
       >
-        <h2 className={`py-4 px-4`}>{vm.name}</h2>
+        <h2 className={`py-4 px-4 text-xl font-md`}>{vm.name}</h2>
 
         <Image
           className='relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert '
           src={vm.thumbnail.url}
           alt={vm.thumbnail.alt}
           width={250}
-          height={300}
+          height={100}
           priority
         />
         <div className={`py-4 px-4 bg-gray-100`}>

@@ -54,12 +54,12 @@ export default function Home({ data }) {
   return (
     <Layout>
       <main className={`flex min-h-screen flex-col items-center`}>
-        <h1 className={`py-4 text-2xl`}>
+        <h1 className={`py-4 text-4xl`}>
           Pamper yourself with our skin-loving range.
         </h1>
         <ProductGrid data={viewModel} />
         <ul
-          className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16 py-2`}
+          className={`flex flex-wrap min-h-screen items-center justify-center lg:mx-16 `}
         ></ul>
       </main>
     </Layout>

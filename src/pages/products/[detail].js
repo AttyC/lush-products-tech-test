@@ -118,12 +118,10 @@ export default function Detail({ data }) {
     parseDescriptionText();
   }
 
-  console.log("hello!", productWeight);
-
   return (
     <Layout>
-      <main className={`min-h-screen container mx-auto`}>
-        <section className={` rounded-lg border border-gray-300`}>
+      <main className={`details-screen min-h-screen container mx-auto`}>
+        <section className={`rounded-lg border border-gray-300`}>
           <h1 className={`text-4xl lg:px-8 lg:py-4 bg-gray-100`}>{name}</h1>
           <Gallery vm={imagesVM} />
           <div className={`lg:flex`}>

@@ -21,5 +21,5 @@ export const Gallery = ({ vm }) => {
       </li>
     );
   });
-  return <ul className={`lg:flex justify-center`}>{gallery}</ul>;
+  return <ul className={`lg:flex`}>{gallery}</ul>;
 };
