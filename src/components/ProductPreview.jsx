@@ -14,12 +14,11 @@ export const ProductPreview = ({ vm }) => {
         <h2 className={`py-4 px-4 text-xl font-md`}>{vm.name}</h2>
 
         <Image
-          className='relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert '
+          className='relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert md:w-64'
           src={vm.thumbnail.url}
           alt={vm.thumbnail.alt}
-          width={250}
+          width={400}
           height={100}
-          priority
         />
         <div className={`py-4 px-4 bg-gray-100`}>
           <p className={`text-sm`}>Stars: {vm.rating}</p>

@@ -28,40 +28,40 @@ export const ProductGrid = (data) => {
 
   return (
     <>
-      <div className='flex flex-wrap justify-between items-between bg-gray-100 container lg:my-16'>
+      <div className='flex flex-wrap justify-between items-between lg:bg-gray-100 container lg:my-16'>
         <button
           onClick={() => handleSorting("-rating")}
-          className='font-medium text-sm px-4 py-2 m-4 border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
+          className='font-medium text-sm px-4 py-2 lg:m-4 m-2 w-full border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
         >
           Sort By Rating (High to Low)
         </button>
         <button
           onClick={() => handleSorting("rating")}
-          className='font-medium text-sm px-4 py-2 m-4 border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
+          className='font-medium text-sm px-4 py-2 lg:m-4 m-2 w-full border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
         >
           Sort By Rating (Low to High)
         </button>
         <button
           onClick={() => handleSorting("category")}
-          className='font-medium text-sm px-4 py-2 m-4 border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
+          className='font-medium text-sm px-4 py-2 lg:m-4 m-2 w-full border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
         >
           Sort By Category (A-Z)
         </button>
         <button
           onClick={() => handleSorting("-category")}
-          className='font-medium text-sm px-4 py-2 m-4 border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
+          className='font-medium text-sm px-4 py-2 lg:m-4 m-2 w-full border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
         >
           Sort By Category (Z-A)
         </button>
         <button
           onClick={() => handleSorting("name")}
-          className='font-medium text-sm px-4 py-2 m-4 border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
+          className='font-medium text-sm px-4 py-2 lg:m-4 m-2 w-full border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
         >
           Sort By Name (A-Z)
         </button>
         <button
           onClick={() => handleSorting("-name")}
-          className='font-medium text-sm px-4 py-2 m-4 border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
+          className='font-medium text-sm px-4 py-2 lg:m-4 m-2 w-full border-b-2 border-gray-300 hover:bg-gray-100 transition-colors text-gray-700'
         >
           Sort By Name (Z-A)
         </button>
