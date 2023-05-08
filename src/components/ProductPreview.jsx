@@ -11,7 +11,7 @@ export const ProductPreview = ({ vm }) => {
         href={"/products/" + vm.slug}
         className='flex flex-col justify-between rounded-lg border transition-colors border-gray-100 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
       >
-        <h2 className={`py-4 px-4 text-xl font-md`}>{vm.name}</h2>
+        <h2 className={`py-4 px-4 font-bold`}>{vm.name}</h2>
         <Image
           className='relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert md:w-64'
           src={vm.thumbnail.url}
