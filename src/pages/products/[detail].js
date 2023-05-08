@@ -20,6 +20,22 @@ const queryProductBySlug = gql`
         sortOrder
       }
       name
+      pricing {
+        priceRange {
+          start {
+            gross {
+              amount
+              currency
+            }
+          }
+          stop {
+            gross {
+              amount
+              currency
+            }
+          }
+        }
+      }
       rating
       slug
       thumbnail {
@@ -58,11 +74,32 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function Detail({ data }) {
-  const { name, media, category, description, rating, variants, weight } =
-    data.product;
+  const {
+    name,
+    category,
+    description,
+    media,
+    pricing,
+    rating,
+    variants,
+    weight,
+  } = data.product;
 
-  console.log("ghsgaHJS", data.product);
+  console.log("data.product", data.product);
+
   const stars = Math.round(rating);
+
+  // would ideally pass this pricing data through ratehr than construct it again
+  const price =
+    pricing.priceRange.start.gross.amount ===
+    pricing.priceRange.stop.gross.amount
+      ? pricing.priceRange.start.gross.amount
+      : `${pricing.priceRange.start.gross.amount} - ${pricing.priceRange.stop.gross.amount}`;
+  const currency =
+    pricing.priceRange.start.gross.currency === "GBP"
+      ? "£"
+      : pricing.priceRange.start.gross.currency;
+
   const productWeight =
     weight !== null
       ? {
@@ -125,7 +162,9 @@ export default function Detail({ data }) {
           <h1 className={`text-4xl lg:px-8 lg:py-4 bg-gray-100`}>{name}</h1>
           <Gallery vm={imagesVM} />
           <div className={`lg:flex`}>
-            <ProductDescription data={{ category, stars, descriptionText }} />
+            <ProductDescription
+              data={{ category, currency, descriptionText, price, stars }}
+            />
             <Specification data={{ productWeight, variants }} />
           </div>
         </section>

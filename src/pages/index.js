@@ -47,6 +47,15 @@ export default function Home({ data }) {
             };
           }),
       rating: Math.round(node.rating),
+      price:
+        node.pricing.priceRange.start.gross.amount ===
+        node.pricing.priceRange.stop.gross.amount
+          ? node.pricing.priceRange.start.gross.amount
+          : `${node.pricing.priceRange.start.gross.amount} - ${node.pricing.priceRange.stop.gross.amount}`,
+      currency:
+        node.pricing.priceRange.start.gross.currency === "GBP"
+          ? "£"
+          : node.pricing.priceRange.start.gross.currency,
     };
     viewModel.products.push(productVm);
   });
@@ -83,7 +92,22 @@ export const query = gql`
             url
             alt
           }
-          isAvailableForPurchase
+          pricing {
+            priceRange {
+              start {
+                gross {
+                  amount
+                  currency
+                }
+              }
+              stop {
+                gross {
+                  amount
+                  currency
+                }
+              }
+            }
+          }
         }
       }
     }
