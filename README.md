@@ -1,23 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Welcome to Luxuriate
 
-## Getting Started
+### Visit the site here: https://lush-products-tech-test.vercel.app/
 
-First, run the development server:
+### This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and deplyed to Vercel from GitHub.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+---
+
+### Run the app locally
+
+Unzip the folder provided and open in your IDE of choice,
+
+OR
+
+`git clone https://github.com/AttyC/lush-products-tech-test` - you will need permission as it's a private repository.
+
+`npm install`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to view and interact with the app.
 
 ## Decisions
 
-- NextJS: I chose to use Next.js, which I haven't used before, rather than Gatsby or using React without server-side rendering, whic I have used a lot.
-- Apollo Client for GraphQL queries: I haven't used Apollo for GraphQL before, as it's 'baked in' to Gatsby, which is where I've used GraphQL most. Another option was to use `fetch()`, which might have been a bit simpler, but I've used that a lot in other React apps and was up for learning something new.
+- NextJS: I chose to use Next.js to try it out, as lush use Next and it comes with server-side rendering, as requested in the specification (see below).
+
+- Apollo Client for GraphQL queries: I haven't used Apollo for GraphQL before, as it's 'baked in' to Gatsby, which is where I've used GraphQL most. Another option was to use `fetch()`, which might have been a bit simpler, but I've used that a lot in other React apps and was up for learning something new. As it turns out, this made testing the app tricky as there were a lot of conflicts.
 - Tailwind for the CSS - it came with the Next installaion. I usually ise styled-components abut for speed and also to try something new (again!) I chose to use Tailwind.
 
 ## With more time
