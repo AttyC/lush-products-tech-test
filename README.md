@@ -28,3 +28,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to view an
 - Improve the gallery layout on the Product Detail page
 - More sorting and filtering options, e.g. more select / buttons for filtering on different criteria - star ratings, category, flag where items are not available.
 - Sale listings for products at sale or discounted prices.
+- Decide whether to show currency in 3-letter code or currency cymbole for ecah country, create a helper file
